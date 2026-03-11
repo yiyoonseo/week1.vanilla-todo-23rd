@@ -10,6 +10,17 @@
   --add-btn-hover-bg: #5c7348;
 }
 
+/* 다크 테마 - 블루베리 컨셉 */
+body.blueberry-mode {
+  --bg-color: #1a1c2c;
+  --text-color: #e0e0ff;
+  --container-bg: #252a41;
+  --accent-color: #7986cb;
+  --button-bg: #3f51b5;
+  --delete-btn-bg: #a180ad;
+  --delete-btn-hover-bg: #7b5e8c;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -21,6 +32,7 @@ body {
   font-family: Pretendard;
   max-width: 500px;
   margin: auto;
+  transition: all 0.4s ease;
 }
 
 .container {
@@ -82,6 +94,8 @@ title {
   border: none;
   outline: none;
   font-size: 14px;
+  background-color: transparent;
+  color: var(--text-color);
 }
 #todo-count {
   font-size: 14px;
@@ -109,7 +123,6 @@ title {
   border-radius: 30px; /* 둥근 모양 */
   gap: 15px;
 }
-
 .todo-list {
   display: flex;
   flex-direction: column;
@@ -123,6 +136,13 @@ title {
   justify-content: space-between; /* 양 끝 정렬 */
   align-items: center;
   padding: 10px 20px;
+}
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  margin-right: 10px;
 }
 
 #todo-text {
@@ -149,6 +169,68 @@ title {
 }
 .delete-btn:hover {
   background-color: var(--delete-btn-hover-bg);
+}
+
+/* 1. 기본 체크박스 숨기기 */
+.checkbox-container input {
+  display: none;
+}
+
+/* 2. 커스텀 체크박스 외형 */
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent-color);
+  border-radius: 6px; /* 살짝 둥근 사각형 */
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  margin: 2px;
+}
+
+/* 3. 체크되었을 때 배경색 변경 */
+.checkbox-container input:checked + .custom-checkbox {
+  background-color: var(--accent-color);
+}
+
+/* 4. 체크 표시(V) 그리기 (가상 요소 활용) */
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  display: none;
+
+  /* 체크 모양 만들기 */
+  left: 7px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* 5. 체크되었을 때 V 표시 보이기 */
+.checkbox-container input:checked + .custom-checkbox::after {
+  display: block;
+}
+
+#theme-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--button-bg);
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 폰트 */
